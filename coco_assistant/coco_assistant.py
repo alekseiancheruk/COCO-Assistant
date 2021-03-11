@@ -3,6 +3,7 @@ import json
 import logging
 import os
 import shutil
+from pathlib import Path
 
 from pycocotools.coco import COCO
 
@@ -119,7 +120,7 @@ class COCO_Assistant:
             logging.debug("Merging Image Dirs...")
 
             for imdir in tqdm(im_dirs):
-                ims = [i for i in os.listdir(imdir) if i[-4:].lower() in imext]
+                ims = [i for i in os.listdir(imdir) if Path(i).suffix in imext]
                 for im in ims:
                     shutil.copyfile(
                         os.path.join(imdir, im),
